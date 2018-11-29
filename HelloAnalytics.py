@@ -2,7 +2,7 @@
 
 import argparse
 import requests
-
+import time
 from datetime import timedelta, datetime
 from apiclient.discovery import build
 import httplib2
@@ -13,10 +13,10 @@ from oauth2client import tools
 SCOPES = ['https://www.googleapis.com/auth/analytics.readonly']
 DISCOVERY_URI = ('https://analyticsreporting.googleapis.com/$discovery/rest')
 CLIENT_SECRETS_PATH = 'client_secrets.json' # Path to client_secrets.json file.
-VIEW_ID = '' # change to your viewId
+VIEW_ID = '184377412' # change to your viewId
 # TG_CHAT_ID = '-262715547' # info tech
-# TG_CHAT_ID = '-281080954' # test group
-TG_CHAT_ID = '-178687780' # bian Info group
+TG_CHAT_ID = '-281080954' # test group
+# TG_CHAT_ID = '-178687780' # bian Info group
 TG_ROBOT_TOKEN = '693501717:AAF4_dojax3T93PmB_uS_Ox7dTLzFvuzeRg'
 
 
@@ -82,7 +82,7 @@ def get_report(analytics):
   ).execute()
 
 
-def print_response(response):
+def send_response(response):
   """Parses and prints the Analytics Reporting API V4 response"""
   tele_text = (datetime.today() + timedelta(-1)).strftime("%Y-%m-%d") + ' Info:' + '\n'
   for report in response.get('reports', []):
@@ -107,11 +107,18 @@ def print_response(response):
   print tele_text
   r = requests.get('https://api.telegram.org/bot' + TG_ROBOT_TOKEN + '/sendMessage?chat_id=' + TG_CHAT_ID + '&parse_mode=html&text=' + tele_text)
 
-
 def main():
   analytics = initialize_analyticsreporting()
   response = get_report(analytics)
-  print_response(response)
+  send_response(response)
+
+def timing():
+  while True:
+    now = datetime.now()
+    if now.hour == 9 and now.minute == 50:
+      main()
+    time.sleep(20)
+
 
 if __name__ == '__main__':
-  main()
+  timing()
