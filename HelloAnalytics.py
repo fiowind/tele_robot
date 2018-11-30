@@ -13,13 +13,9 @@ from oauth2client import tools
 SCOPES = ['https://www.googleapis.com/auth/analytics.readonly']
 DISCOVERY_URI = ('https://analyticsreporting.googleapis.com/$discovery/rest')
 CLIENT_SECRETS_PATH = 'client_secrets.json' # Path to client_secrets.json file.
-VIEW_ID = '184377412' # change to your viewId
-# TG_CHAT_ID = '-262715547' # info tech
-TG_CHAT_ID = '-281080954' # test group
-# TG_CHAT_ID = '-178687780' # bian Info group
-TG_ROBOT_TOKEN = '693501717:AAF4_dojax3T93PmB_uS_Ox7dTLzFvuzeRg'
-
-
+VIEW_ID = '' # change to your viewId
+TG_CHAT_ID = '' # chat id
+TG_ROBOT_TOKEN = '' # your robot id
 
 gaNameMap = {'ga:users': 'users', 'ga:pageviews': 'pageviews', 'ga:deviceCategory': 'Device category'}
 
@@ -121,4 +117,5 @@ def timing():
 
 
 if __name__ == '__main__':
+  # main()
   timing()
